@@ -1,0 +1,88 @@
+@startuml
+class hello.hellosping.controller.HelloController {
++ String hello(Model)
++ String helloMvc(String,Model)
++ String helloString(String)
++ Hello helloApi(String)
+}
+
+class hello.hellosping.controller.HelloController$Hello {
+- String name
++ String getName()
++ void setName(String)
+}
+
+
+class hello.hellosping.service.MemberServiceTest {
+~ MemberService memberService
+~ MemoryMemberRepository memberRepository
++ void beforeEach()
++ void afterEach()
+~ void 회원가입()
++ void 중복_회원_예외()
+~ void findMembers()
+~ void findOne()
+}
+
+
+class hello.hellosping.repository.MemoryMemberRepositoryTest {
+~ MemoryMemberRepository repository
++ void afterEach()
++ void save()
++ void findByName()
++ void findAll()
+}
+
+
+interface hello.hellosping.repository.MemberRepository {
+~ Member save(Member)
+~ Optional<Member> findById(Long)
+~ Optional<Member> findByname(String)
+~ List<Member> findAll()
+}
+
+class hello.hellosping.controller.MemberController {
+}
+class hello.hellosping.repository.MemoryMemberRepository {
+- {static} Map<Long,Member> store
+- {static} long sequence
++ Member save(Member)
++ Optional<Member> findById(Long)
++ Optional<Member> findByname(String)
++ List<Member> findAll()
++ void clearStore()
+}
+
+
+class hello.hellosping.HelloSpingApplication {
++ {static} void main(String[])
+}
+
+class hello.hellosping.service.MemberService {
+- MemberRepository memberRepository
++ Long join(Member)
+- void validateDuplicateMember(Member)
++ List<Member> findMembers()
++ Optional<Member> findOne(Long)
+}
+
+
+class hello.hellosping.domain.Member {
+- Long id
+- String name
++ Long getId()
++ void setId(Long)
++ String getName()
++ void setName(String)
+}
+
+
+class hello.hellosping.HelloSpingApplicationTests {
+~ void contextLoads()
+}
+
+
+
+hello.hellosping.controller.HelloController +.. hello.hellosping.controller.HelloController$Hello
+hello.hellosping.repository.MemberRepository <|.. hello.hellosping.repository.MemoryMemberRepository
+@enduml

@@ -2,7 +2,8 @@ package hello.hellosping.service;
 
 import hello.hellosping.domain.Member;
 import hello.hellosping.repository.MemberRepository;
-import hello.hellosping.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class MemberService {
 
     private void validateDuplicateMember(Member member) {
         //같은 이름이 있는 중복 회원x
-        memberRepository.findByname(member.getName())
+        memberRepository.findByName(member.getName())
             .ifPresent(m -> {
                 throw new IllegalStateException("이미 존재하는 회원입니다.");
         });
